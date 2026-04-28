@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurullah Al Amin - Digital Marketing Expert</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0a0a0a',
+                        surface: 'rgba(255, 255, 255, 0.03)',
+                        surfaceHover: 'rgba(255, 255, 255, 0.06)',
+                        primary: '#6C63FF',
+                        secondary: '#48C9B0',
+                        accent: '#FFD700',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-primary': 'linear-gradient(135deg, #6C63FF, #48C9B0)',
+                    },
+                    letterSpacing: {
+                        heading: '-0.02em',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Base & Scrollbar */
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; letter-spacing: -0.02em; }
+
+        /* Preloader */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #0a0a0a; display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        .morph-icon { transition: all 0.5s ease; }
+        .spinner-ring {
+            position: absolute; width: 100px; height: 100px;
+            border: 3px solid transparent; border-top-color: #6C63FF; border-bottom-color: #48C9B0;
+            border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(135deg, #6C63FF, #48C9B0);
+            z-index: 10000; width: 0%; transition: width 0.1s;
+        }
+
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Navbar Scrolled */
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            padding-top: 15px; padding-bottom: 15px;
+        }
+
+        /* Nav Link Underline */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+            background: linear-gradient(135deg, #6C63FF, #48C9B0); transition: width 0.3s;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #6C63FF, #48C9B0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Blinking Cursor */
+        .blink-cursor { animation: blink 1s step-end infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Floating Orbs */
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; z-index: -1;
+            animation: float 10s ease-in-out infinite alternate;
+        }
+        .orb-1 { width: 400px; height: 400px; background: #6C63FF; top: -100px; left: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: #48C9B0; bottom: -50px; right: 10%; animation-delay: -3s; }
+        .orb-3 { width: 250px; height: 250px; background: #FFD700; top: 40%; left: 30%; animation-delay: -6s; opacity: 0.15; }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 50px); } }
+
+        /* Ripple Effect */
+        .ripple-btn { position: relative; overflow: hidden; }
+        .ripple {
+            position: absolute; border-radius: 50%; background: rgba(255,255,255,0.4);
+            transform: scale(0); animation: ripple-anim 0.6s linear; pointer-events: none;
+        }
+        @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
+
+        /* Reveal on Scroll */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Tilt Card */
+        .tilt-card { transition: transform 0.1s ease-out; transform-style: preserve-3d; }
+        
+        /* Service Card Hover */
+        .service-card { transition: all 0.3s ease; }
+        .service-card:hover {
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(108, 99, 255, 0.4);
+            transform: translateY(-10px);
+        }
+        
+        /* Rotating Border Profile */
+        .profile-wrap {
+            position: relative; width: 100%; max-width: 450px; aspect-ratio: 1; margin: auto;
+        }
+        .profile-border {
+            position: absolute; inset: -10px; background: linear-gradient(135deg, #6C63FF, #48C9B0);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: border-morph 8s ease-in-out infinite alternate; z-index: 0;
+        }
+        .profile-img {
+            position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: border-morph 8s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes border-morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            100% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+        }
+
+        /* Portfolio */
+        .portfolio-item { display: none; }
+        .portfolio-item.show { display: block; animation: fadeInScale 0.5s ease; }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        
+        /* Modal Lightbox */
+        #lightbox { transition: opacity 0.3s, visibility 0.3s; }
+        #lightbox.open { opacity: 1; visibility: visible; }
+        #lightbox .modal-content { transition: transform 0.3s; transform: scale(0.9); }
+        #lightbox.open .modal-content { transform: scale(1); }
+
+        /* Testimonial Carousel */
+        .carousel-track { transition: transform 0.5s ease-in-out; }
+
+        /* FAQ Accordion */
+        .faq-answer { overflow: hidden; transition: max-height 0.3s ease-out; max-height: 0; }
+        .faq-item.active .faq-answer { max-height: 500px; }
+        .faq-item.active .fa-chevron-down { transform: rotate(180deg); }
+        .faq-item .fa-chevron-down { transition: transform 0.3s ease; }
+
+        /* Floating Labels */
+        .floating-group { position: relative; }
+        .floating-input {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: white; padding: 20px 16px 8px; border-radius: 8px; outline: none; transition: all 0.3s;
+        }
+        .floating-input:focus { border-color: #6C63FF; background: rgba(255,255,255,0.1); }
+        .floating-label {
+            position: absolute; left: 16px; top: 14px; color: #888; transition: all 0.3s; pointer-events: none;
+        }
+        .floating-input:focus ~ .floating-label, .floating-input:not(:placeholder-shown) ~ .floating-label {
+            top: 6px; font-size: 10px; color: #48C9B0;
+        }
+
+        /* Back to top */
+        #btt { transition: all 0.3s; opacity: 0; visibility: hidden; transform: translateY(20px); }
+        #btt.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; border-radius: 8px;
+            color: white; transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 10000;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* Spin Globe */
+        .spin-globe { animation: spin 10s linear infinite; }
+        
+        /* SVG Animation */
+        .svg-float { animation: float-svg 4s ease-in-out infinite alternate; }
+        @keyframes float-svg { 0% { transform: translateY(0px); } 100% { transform: translateY(-20px); } }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="relative flex items-center justify-center">
+            <div class="spinner-ring"></div>
+            <div id="pl-logo" class="morph-icon text-4xl font-heading font-bold gradient-text z-10">NA</div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
+
+    <!-- Back to Top -->
+    <button id="btt" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gradient-primary text-white flex items-center justify-center shadow-lg hover:shadow-primary/50 z-50 ripple-btn animate-bounce">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast bg-gradient-primary shadow-lg shadow-primary/30 flex items-center">
+        <i class="fa-solid fa-circle-check mr-2"></i> <span id="toast-msg">Action successful!</span>
+    </div>
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed top-0 w-full z-40 transition-all duration-300 py-6 px-5 lg:px-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-heading font-bold text-white tracking-heading">
+                Nurullah <span class="text-primary">Al Amin</span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-gray-300 hover:text-white font-medium active">Home</a>
+                <a href="#services" class="nav-link text-gray-300 hover:text-white font-medium">Services</a>
+                <a href="#portfolio" class="nav-link text-gray-300 hover:text-white font-medium">Portfolio</a>
+                <a href="#pricing" class="nav-link text-gray-300 hover:text-white font-medium">Pricing</a>
+                <a href="#faq" class="nav-link text-gray-300 hover:text-white font-medium">FAQ</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white font-medium">Contact</a>
+            </nav>
+
+            <!-- Mobile Hamburger -->
+            <button id="mobile-toggle" class="md:hidden text-white text-2xl focus:outline-none z-50 relative">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-darkbg/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center transform scale-0 opacity-0 transition-all duration-300">
+        <nav class="flex flex-col gap-6 text-center">
+            <a href="#home" class="mobile-link text-2xl font-heading font-semibold text-gray-300 hover:text-white">Home</a>
+            <a href="#services" class="mobile-link text-2xl font-heading font-semibold text-gray-300 hover:text-white">Services</a>
+            <a href="#portfolio" class="mobile-link text-2xl font-heading font-semibold text-gray-300 hover:text-white">Portfolio</a>
+            <a href="#pricing" class="mobile-link text-2xl font-heading font-semibold text-gray-300 hover:text-white">Pricing</a>
+            <a href="#faq" class="mobile-link text-2xl font-heading font-semibold text-gray-300 hover:text-white">FAQ</a>
+            <a href="#contact" class="mobile-link text-2xl font-heading font-semibold text-gray-300 hover:text-white">Contact</a>
+        </nav>
+        <div class="flex gap-6 mt-12">
+            <a href="#" class="text-gray-400 hover:text-primary text-xl"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary text-xl"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary text-xl"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+    </div>
+
+    <main>
+        <!-- Background Orbs -->
+        <div class="fixed inset-0 overflow-hidden pointer-events-none">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center pt-20 pb-10 px-5 lg:px-10">
+            <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                <div class="reveal">
+                    <div class="inline-block px-4 py-1.5 rounded-full border border-primary/50 bg-primary/10 text-primary text-sm font-medium mb-6 shadow-[0_0_15px_rgba(108,99,255,0.2)]">
+                        🚀 Digital Marketing Expert
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold font-heading mb-6 text-white text-shadow-sm">
+                        Hi, I'm <br/><span class="gradient-text">Nurullah</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 min-h-[80px]">
+                        <span id="hero-typewriter"></span><span class="blink-cursor text-primary">|</span>
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="ripple-btn px-8 py-3.5 rounded-full bg-gradient-primary text-white font-semibold hover:shadow-[0_0_20px_rgba(108,99,255,0.4)] transition-all transform hover:-translate-y-1">
+                            Start a Project
+                        </a>
+                        <a href="#portfolio" class="ripple-btn px-8 py-3.5 rounded-full border border-gray-500 text-white font-semibold hover:border-primary hover:text-primary transition-all">
+                            My Work
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden lg:flex justify-center reveal delay-200">
+                    <!-- Hero Image -->
+                    <div class="relative w-full max-w-lg svg-float p-[2px] rounded-2xl bg-gradient-to-tr from-[#6C63FF]/60 to-[#48C9B0]/60 shadow-[0_20px_50px_rgba(108,99,255,0.2)]">
+                        <div class="relative rounded-2xl overflow-hidden bg-darkbg shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80" alt="Digital Marketing Team" class="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity">
+                            <!-- Glossy Overlay -->
+                            <div class="absolute inset-0 z-10 rounded-2xl border border-white/30 pointer-events-none mix-blend-overlay shadow-[inset_0_0_20px_rgba(255,255,255,0.2)]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#stats" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/50 hover:text-white animate-bounce transition-colors">
+                <i class="fa-solid fa-chevron-down text-2xl"></i>
+            </a>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats" class="py-20 px-5 lg:px-10 relative z-10">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-8 rounded-2xl text-center reveal tilt-card">
+                    <i class="fa-solid fa-chart-line text-4xl text-primary mb-4"></i>
+                    <h3 class="text-5xl font-bold font-heading mb-2"><span class="counter" data-target="300">0</span>%</h3>
+                    <div class="h-1 w-12 bg-gradient-primary mx-auto mb-3 rounded-full"></div>
+                    <p class="text-gray-400">Average ROI Increase</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center reveal delay-100 tilt-card">
+                    <i class="fa-solid fa-users text-4xl text-secondary mb-4"></i>
+                    <h3 class="text-5xl font-bold font-heading mb-2"><span class="counter" data-target="150">0</span>+</h3>
+                    <div class="h-1 w-12 bg-gradient-primary mx-auto mb-3 rounded-full"></div>
+                    <p class="text-gray-400">Campaigns Managed</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center reveal delay-200 tilt-card">
+                    <i class="fa-solid fa-face-smile text-4xl text-accent mb-4"></i>
+                    <h3 class="text-5xl font-bold font-heading mb-2"><span class="counter" data-target="98">0</span>%</h3>
+                    <div class="h-1 w-12 bg-gradient-primary mx-auto mb-3 rounded-full"></div>
+                    <p class="text-gray-400">Client Satisfaction</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-5 lg:px-10 relative z-10">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="profile-wrap">
+                        <div class="profile-border"></div>
+                        <img src="https://i.pravatar.cc/450?img=11" alt="Nurullah Al Amin" class="profile-img shadow-2xl">
+                    </div>
+                </div>
+                <div class="reveal delay-200">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="h-[1px] w-12 bg-primary"></div>
+                        <span class="text-primary font-medium tracking-wider uppercase text-sm">About Me</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-bold font-heading mb-6">Driving Growth Through <span class="gradient-text">Innovation</span></h2>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        With over 7 years of experience in the digital marketing landscape, I specialize in crafting data-driven strategies that elevate brands and maximize ROI. My expertise spans SEO, social media, paid advertising, and marketing automation.
+                    </p>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        I believe in a holistic approach to marketing, where creativity meets analytics. Whether you're a startup looking for market entry or an established enterprise aiming to scale, I provide tailored solutions that deliver measurable results.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center gap-8">
+                        <button class="ripple-btn px-8 py-3.5 rounded-full bg-white text-darkbg font-bold hover:bg-gray-200 transition-colors w-full sm:w-auto text-center">
+                            Download CV <i class="fa-solid fa-download ml-2"></i>
+                        </button>
+                        
+                        <!-- Signature SVG Placeholder -->
+                        <svg width="150" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" class="opacity-70">
+                            <path d="M10,40 Q30,10 50,35 T90,20 T130,40 T180,15" fill="none" stroke="#6C63FF" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M40,30 L60,30 M120,25 L140,25" stroke="#48C9B0" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 px-5 lg:px-10 relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <div class="inline-flex items-center justify-center gap-4 mb-4">
+                        <div class="h-[1px] w-12 bg-primary/50"></div>
+                        <span class="text-primary font-medium tracking-wider uppercase text-sm">What I Do</span>
+                        <div class="h-[1px] w-12 bg-primary/50"></div>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-bold font-heading text-white">Premium <span class="gradient-text">Services</span></h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service 1 -->
+                    <div class="glass-card p-8 rounded-[24px] service-card tilt-card reveal">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center text-2xl text-white mb-6 shadow-lg shadow-primary/30">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">SEO & GEO Optimization</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Dominate search rankings and local visibility with cutting-edge, white-hat SEO strategies and data analysis.</p>
+                        <a href="#" class="text-secondary font-medium hover:text-white transition-colors flex items-center group">
+                            Learn More <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="glass-card p-8 rounded-[24px] service-card tilt-card reveal delay-100">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center text-2xl text-white mb-6 shadow-lg shadow-primary/30">
+                            <i class="fa-solid fa-hashtag"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Social Media Management</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Build an engaged community and strong brand voice across Instagram, LinkedIn, Twitter, and Facebook.</p>
+                        <a href="#" class="text-secondary font-medium hover:text-white transition-colors flex items-center group">
+                            Learn More <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="glass-card p-8 rounded-[24px] service-card tilt-card reveal delay-200">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center text-2xl text-white mb-6 shadow-lg shadow-primary/30">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Paid Advertising (PPC)</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Maximize your ROI with hyper-targeted campaigns on Google Ads, Meta Ads, and LinkedIn Ads.</p>
+                        <a href="#" class="text-secondary font-medium hover:text-white transition-colors flex items-center group">
+                            Learn More <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="glass-card p-8 rounded-[24px] service-card tilt-card reveal">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center text-2xl text-white mb-6 shadow-lg shadow-primary/30">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Content Marketing</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Tell compelling stories that convert. High-quality blogs, copy, video scripts, and engaging graphics.</p>
+                        <a href="#" class="text-secondary font-medium hover:text-white transition-colors flex items-center group">
+                            Learn More <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                    <!-- Service 5 -->
+                    <div class="glass-card p-8 rounded-[24px] service-card tilt-card reveal delay-100">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center text-2xl text-white mb-6 shadow-lg shadow-primary/30">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Marketing Automation</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Streamline your funnels. Nurture leads on autopilot using advanced CRM setups and email sequences.</p>
+                        <a href="#" class="text-secondary font-medium hover:text-white transition-colors flex items-center group">
+                            Learn More <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                    <!-- Service 6 -->
+                    <div class="glass-card p-8 rounded-[24px] service-card tilt-card reveal delay-200">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center text-2xl text-white mb-6 shadow-lg shadow-primary/30">
+                            <i class="fa-regular fa-envelope-open"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Cold Email & B2B Outreach</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Generate high-quality B2B meetings with personalized, scaleable cold email infrastructures.</p>
+                        <a href="#" class="text-secondary font-medium hover:text-white transition-colors flex items-center group">
+                            Learn More <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 px-5 lg:px-10 relative z-10 bg-surface">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Recent <span class="gradient-text">Case Studies</span></h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Explore some of my recent successful projects and the results they achieved.</p>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 mb-10 reveal">
+                    <button class="filter-btn active px-6 py-2 rounded-full border border-primary/50 bg-primary/20 text-white transition-all" data-filter="all">All</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-700 hover:border-primary/50 text-gray-400 hover:text-white transition-all" data-filter="seo">SEO</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-700 hover:border-primary/50 text-gray-400 hover:text-white transition-all" data-filter="social">Social</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-700 hover:border-primary/50 text-gray-400 hover:text-white transition-all" data-filter="ads">Ads</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-700 hover:border-primary/50 text-gray-400 hover:text-white transition-all" data-filter="content">Content</button>
+                </div>
+
+                <!-- Masonry Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                    <!-- Item 1 -->
+                    <div class="portfolio-item show rounded-xl overflow-hidden relative group cursor-pointer reveal tilt-card" data-category="seo" onclick="openLightbox('https://picsum.photos/seed/seo1/800/600', 'TechStore SEO Growth', '150% organic traffic increase in 6 months.')">
+                        <img src="https://picsum.photos/seed/seo1/400/300" alt="SEO Project" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-primary text-sm font-bold uppercase tracking-wider mb-1">SEO</span>
+                            <h3 class="text-xl font-bold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">TechStore Growth</h3>
+                            <button class="text-sm border border-white/50 rounded-full px-4 py-1.5 w-max hover:bg-white hover:text-darkbg transition-colors transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Case Study</button>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="portfolio-item show rounded-xl overflow-hidden relative group cursor-pointer reveal tilt-card" data-category="social" onclick="openLightbox('https://picsum.photos/seed/soc1/800/600', 'FashionBrand Instagram', 'Grew followers from 10k to 150k in a year.')">
+                        <img src="https://picsum.photos/seed/soc1/400/400" alt="Social Project" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-secondary text-sm font-bold uppercase tracking-wider mb-1">Social Media</span>
+                            <h3 class="text-xl font-bold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">FashionBrand Reach</h3>
+                            <button class="text-sm border border-white/50 rounded-full px-4 py-1.5 w-max hover:bg-white hover:text-darkbg transition-colors transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Case Study</button>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="portfolio-item show rounded-xl overflow-hidden relative group cursor-pointer reveal tilt-card" data-category="ads" onclick="openLightbox('https://picsum.photos/seed/ads1/800/600', 'SaaS Google Ads', 'Reduced CPA by 40% while doubling lead volume.')">
+                        <img src="https://picsum.photos/seed/ads1/400/250" alt="Ads Project" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-accent text-sm font-bold uppercase tracking-wider mb-1">Paid Ads</span>
+                            <h3 class="text-xl font-bold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">SaaS Lead Gen</h3>
+                            <button class="text-sm border border-white/50 rounded-full px-4 py-1.5 w-max hover:bg-white hover:text-darkbg transition-colors transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Case Study</button>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="portfolio-item show rounded-xl overflow-hidden relative group cursor-pointer reveal tilt-card" data-category="content" onclick="openLightbox('https://picsum.photos/seed/cont1/800/600', 'B2B Blog Revamp', 'Achieved 500k monthly readers.')">
+                        <img src="https://picsum.photos/seed/cont1/400/350" alt="Content Project" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-primary text-sm font-bold uppercase tracking-wider mb-1">Content</span>
+                            <h3 class="text-xl font-bold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">B2B Blog Strategy</h3>
+                            <button class="text-sm border border-white/50 rounded-full px-4 py-1.5 w-max hover:bg-white hover:text-darkbg transition-colors transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Case Study</button>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="portfolio-item show rounded-xl overflow-hidden relative group cursor-pointer reveal tilt-card" data-category="seo" onclick="openLightbox('https://picsum.photos/seed/seo2/800/600', 'Local Restaurant SEO', 'Ranked #1 for 50+ local keywords.')">
+                        <img src="https://picsum.photos/seed/seo2/400/300" alt="SEO Project" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-secondary text-sm font-bold uppercase tracking-wider mb-1">SEO</span>
+                            <h3 class="text-xl font-bold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Local Dominance</h3>
+                            <button class="text-sm border border-white/50 rounded-full px-4 py-1.5 w-max hover:bg-white hover:text-darkbg transition-colors transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Case Study</button>
+                        </div>
+                    </div>
+                    <!-- Item 6 -->
+                    <div class="portfolio-item show rounded-xl overflow-hidden relative group cursor-pointer reveal tilt-card" data-category="social" onclick="openLightbox('https://picsum.photos/seed/soc2/800/600', 'Fitness App Launch', 'Generated 10k app downloads in week 1.')">
+                        <img src="https://picsum.photos/seed/soc2/400/280" alt="Social Project" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-accent text-sm font-bold uppercase tracking-wider mb-1">Social Media</span>
+                            <h3 class="text-xl font-bold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">App Launch Viral</h3>
+                            <button class="text-sm border border-white/50 rounded-full px-4 py-1.5 w-max hover:bg-white hover:text-darkbg transition-colors transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="fixed inset-0 z-[10000] bg-black/90 backdrop-blur-sm flex items-center justify-center opacity-0 invisible">
+            <div class="absolute inset-0" onclick="closeLightbox()"></div>
+            <div class="modal-content bg-darkbg border border-gray-800 p-4 md:p-6 rounded-2xl max-w-4xl w-full mx-4 relative z-10">
+                <button onclick="closeLightbox()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <img id="lb-img" src="" alt="Case Study" class="w-full h-[40vh] md:h-[60vh] object-cover rounded-xl mb-6">
+                <h3 id="lb-title" class="text-2xl md:text-3xl font-bold font-heading mb-2"></h3>
+                <p id="lb-desc" class="text-gray-400"></p>
+            </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 px-5 lg:px-10 relative z-10 overflow-hidden">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Client <span class="gradient-text">Testimonials</span></h2>
+                </div>
+
+                <div class="relative max-w-5xl mx-auto reveal" id="testimonial-container">
+                    <div class="overflow-hidden">
+                        <div class="carousel-track flex gap-6" id="carousel-track">
+                            <!-- Cards inserted via JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center gap-6 mt-8">
+                        <button id="prev-btn" class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-primary hover:border-primary transition-colors"><i class="fa-solid fa-arrow-left"></i></button>
+                        <div class="flex gap-2" id="carousel-dots"></div>
+                        <button id="next-btn" class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-primary hover:border-primary transition-colors"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 px-5 lg:px-10 relative z-10 bg-surface">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Popular <span class="gradient-text">Packages</span></h2>
+                    <p class="text-gray-400">Boost your social presence instantly with our transparent pricing.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Pricing 1 -->
+                    <div class="glass-card p-8 rounded-3xl reveal tilt-card flex flex-col">
+                        <i class="fa-solid fa-user-plus text-3xl text-primary mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Follower Boost</h3>
+                        <div class="text-4xl font-bold text-white mb-6">$9.99</div>
+                        <div class="h-px w-full bg-white/10 mb-6"></div>
+                        <ul class="space-y-4 mb-8 flex-1 text-gray-300">
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> 100 Real-looking Followers</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> 24 Hour Delivery</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> No Password Needed</li>
+                        </ul>
+                        <button onclick="orderToast()" class="ripple-btn w-full py-3 rounded-xl border border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors">Order Now</button>
+                    </div>
+
+                    <!-- Pricing 2 (Popular) -->
+                    <div class="glass-card p-8 rounded-3xl reveal delay-100 tilt-card flex flex-col relative transform lg:-translate-y-4" style="border: 1px solid #48C9B0; box-shadow: 0 0 30px rgba(72, 201, 176, 0.1);">
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-primary text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                            Most Popular
+                        </div>
+                        <i class="fa-solid fa-heart text-3xl text-secondary mb-4 mt-2"></i>
+                        <h3 class="text-xl font-bold mb-2">Post Engagement</h3>
+                        <div class="text-4xl font-bold text-white mb-6">$14.99</div>
+                        <div class="h-px w-full bg-white/10 mb-6"></div>
+                        <ul class="space-y-4 mb-8 flex-1 text-gray-300">
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> 1K High-quality Likes</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Instant Start</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Split across posts</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Premium Support</li>
+                        </ul>
+                        <button onclick="orderToast()" class="ripple-btn w-full py-3 rounded-xl bg-gradient-primary text-white font-bold hover:shadow-[0_0_20px_rgba(108,99,255,0.4)] transition-shadow">Order Now</button>
+                    </div>
+
+                    <!-- Pricing 3 -->
+                    <div class="glass-card p-8 rounded-3xl reveal delay-200 tilt-card flex flex-col">
+                        <i class="fa-solid fa-comment-dots text-3xl text-accent mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Conversation Starter</h3>
+                        <div class="text-4xl font-bold text-white mb-6">$29.99</div>
+                        <div class="h-px w-full bg-white/10 mb-6"></div>
+                        <ul class="space-y-4 mb-8 flex-1 text-gray-300">
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> 500 Custom Comments</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Gradual Delivery</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Safe & Secure</li>
+                        </ul>
+                        <button onclick="orderToast()" class="ripple-btn w-full py-3 rounded-xl border border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors">Order Now</button>
+                    </div>
+
+                    <!-- Pricing 4 -->
+                    <div class="glass-card p-8 rounded-3xl reveal tilt-card flex flex-col">
+                        <i class="fa-solid fa-share-nodes text-3xl text-primary mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Viral Reach</h3>
+                        <div class="text-4xl font-bold text-white mb-6">$24.99</div>
+                        <div class="h-px w-full bg-white/10 mb-6"></div>
+                        <ul class="space-y-4 mb-8 flex-1 text-gray-300">
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> 1K Shares</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Global Audience</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Improve Ranking</li>
+                        </ul>
+                        <button onclick="orderToast()" class="ripple-btn w-full py-3 rounded-xl border border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors">Order Now</button>
+                    </div>
+
+                    <!-- Pricing 5 -->
+                    <div class="glass-card p-8 rounded-3xl reveal delay-100 tilt-card flex flex-col">
+                        <i class="fa-solid fa-play text-3xl text-secondary mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Video Amplifier</h3>
+                        <div class="text-4xl font-bold text-white mb-6">$19.99</div>
+                        <div class="h-px w-full bg-white/10 mb-6"></div>
+                        <ul class="space-y-4 mb-8 flex-1 text-gray-300">
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> 5K Video Views</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> High Retention</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Reels & Shorts Support</li>
+                        </ul>
+                        <button onclick="orderToast()" class="ripple-btn w-full py-3 rounded-xl border border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors">Order Now</button>
+                    </div>
+
+                    <!-- Pricing 6 -->
+                    <div class="glass-card p-8 rounded-3xl reveal delay-200 tilt-card flex flex-col">
+                        <i class="fa-solid fa-users-rectangle text-3xl text-accent mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Community Builder</h3>
+                        <div class="text-4xl font-bold text-white mb-6">$49.99</div>
+                        <div class="h-px w-full bg-white/10 mb-6"></div>
+                        <ul class="space-y-4 mb-8 flex-1 text-gray-300">
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> 1K Group Members</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> Niche Targeted</li>
+                            <li><i class="fa-solid fa-check text-secondary mr-2"></i> 30-day Refill</li>
+                        </ul>
+                        <button onclick="orderToast()" class="ripple-btn w-full py-3 rounded-xl border border-primary text-primary font-bold hover:bg-primary hover:text-white transition-colors">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 px-5 lg:px-10 relative z-10">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold font-heading mb-4">Frequently Asked <span class="gradient-text">Questions</span></h2>
+                </div>
+
+                <div class="space-y-4" id="accordion">
+                    <!-- FAQ items generated via JS for cleaner HTML -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-5 lg:px-10 relative z-10">
+            <div class="max-w-7xl mx-auto glass-card rounded-3xl overflow-hidden reveal">
+                <div class="grid lg:grid-cols-5 h-full">
+                    
+                    <!-- Form Side -->
+                    <div class="lg:col-span-3 p-8 md:p-12">
+                        <div class="inline-block px-4 py-1.5 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-6">
+                            <i class="fa-solid fa-bolt mr-2"></i> Response within 24 hours
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-bold font-heading mb-8">Let's build something <span class="gradient-text">great</span>.</h2>
+                        
+                        <form id="contact-form" class="space-y-6" novalidate>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="floating-group">
+                                    <input type="text" id="name" class="floating-input" placeholder=" " required>
+                                    <label for="name" class="floating-label">Your Name</label>
+                                    <p class="text-red-400 text-xs mt-1 hidden" id="err-name">Must be at least 2 characters.</p>
+                                </div>
+                                <div class="floating-group">
+                                    <input type="email" id="email" class="floating-input" placeholder=" " required>
+                                    <label for="email" class="floating-label">Email Address</label>
+                                    <p class="text-red-400 text-xs mt-1 hidden" id="err-email">Valid email required.</p>
+                                </div>
+                            </div>
+                            <div class="floating-group">
+                                <textarea id="message" rows="4" class="floating-input resize-none" placeholder=" " required></textarea>
+                                <label for="message" class="floating-label">Your Message (min 10 words)</label>
+                                <p class="text-red-400 text-xs mt-1 hidden" id="err-msg">Must be more than 10 words.</p>
+                            </div>
+                            <button type="submit" class="ripple-btn w-full py-4 rounded-xl bg-gradient-primary text-white font-bold text-lg hover:shadow-[0_0_20px_rgba(108,99,255,0.4)] transition-all">
+                                Send Message <i class="fa-solid fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Info Side -->
+                    <div class="lg:col-span-2 bg-black/40 p-8 md:p-12 border-t lg:border-t-0 lg:border-l border-white/10 flex flex-col">
+                        <h3 class="text-2xl font-bold font-heading mb-8">Contact Info</h3>
+                        
+                        <div class="space-y-6 mb-10 flex-1">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-primary text-xl flex-shrink-0">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 text-sm mb-1">Email Me</h4>
+                                    <a href="mailto:hello@nurullah.com" class="text-lg font-medium hover:text-primary transition-colors">hello@nurullah.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-secondary text-xl flex-shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 text-sm mb-1">Call Me</h4>
+                                    <a href="tel:+1234567890" class="text-lg font-medium hover:text-secondary transition-colors">+1 (234) 567-890</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-accent text-xl flex-shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 text-sm mb-1">Location</h4>
+                                    <p class="text-lg font-medium">New York, NY (Remote Worldwide)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map Image Placeholder -->
+                        <div class="w-full h-40 rounded-xl overflow-hidden relative">
+                            <img src="https://picsum.photos/seed/map/600/300" alt="Map" class="w-full h-full object-cover filter grayscale opacity-60">
+                            <div class="absolute inset-0 flex items-center justify-center text-primary text-3xl animate-bounce">
+                                <i class="fa-solid fa-location-pin"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white/10 pt-20 pb-8 px-5 lg:px-10 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <!-- Col 1 -->
+            <div>
+                <a href="#" class="text-2xl font-heading font-bold text-white tracking-heading block mb-6">
+                    Nurullah <span class="text-primary">Al Amin</span>
+                </a>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    Transforming brands into industry leaders with data-driven digital marketing and innovative strategies.
+                </p>
+            </div>
+            
+            <!-- Col 2 -->
+            <div>
+                <h4 class="text-lg font-bold font-heading mb-6">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                    <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Me</a></li>
+                    <li><a href="#portfolio" class="text-gray-400 hover:text-white transition-colors">Portfolio</a></li>
+                    <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3 -->
+            <div>
+                <h4 class="text-lg font-bold font-heading mb-6">Services</h4>
+                <ul class="space-y-3">
+                    <li><a href="#services" class="text-gray-400 hover:text-primary transition-colors">SEO Optimization</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-secondary transition-colors">Social Media</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-accent transition-colors">Paid Ads</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Content Marketing</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4 -->
+            <div>
+                <h4 class="text-lg font-bold font-heading mb-6">Newsletter</h4>
+                <p class="text-gray-400 mb-4">Subscribe for the latest marketing tips.</p>
+                <div class="relative">
+                    <input type="email" id="nl-email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-white focus:border-primary outline-none transition-colors">
+                    <button onclick="subToast()" class="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center text-white hover:shadow-lg transition-shadow">
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-gray-500 text-sm">© 2024 Nurullah Al Amin. All rights reserved.</p>
+            
+            <div class="flex items-center gap-6">
+                <!-- Socials -->
+                <a href="#" class="text-gray-500 hover:text-[#1877F2] hover:drop-shadow-[0_0_10px_#1877F2] transition-all text-xl"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="text-gray-500 hover:text-[#1DA1F2] hover:drop-shadow-[0_0_10px_#1DA1F2] transition-all text-xl"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="text-gray-500 hover:text-[#0A66C2] hover:drop-shadow-[0_0_10px_#0A66C2] transition-all text-xl"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="text-gray-500 hover:text-[#E4405F] hover:drop-shadow-[0_0_10px_#E4405F] transition-all text-xl"><i class="fa-brands fa-instagram"></i></a>
+                
+                <div class="w-px h-6 bg-white/20 mx-2"></div>
+                
+                <!-- Globe SVG -->
+                <svg class="w-6 h-6 text-gray-500 spin-globe" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Preloader
+            const preloader = document.getElementById('preloader');
+            const plLogo = document.getElementById('pl-logo');
+            setTimeout(() => {
+                plLogo.innerHTML = '<i class="fa-solid fa-check text-5xl"></i>';
+                plLogo.classList.add('scale-150', 'text-secondary');
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 500);
+                }, 500);
+            }, 1500);
+
+            // 2. Scroll Progress Bar & Back to Top & Sticky Nav
+            const progressBar = document.getElementById('scroll-progress');
+            const bttBtn = document.getElementById('btt');
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                progressBar.style.width = `${(scrollY / docHeight) * 100}%`;
+
+                if (scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+
+                if (scrollY > 500) bttBtn.classList.add('show');
+                else bttBtn.classList.remove('show');
+            });
+
+            bttBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // 3. Mobile Menu
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('scale-0', 'opacity-0');
+                    mobileMenu.classList.add('scale-100', 'opacity-100');
+                    mobileToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.remove('scale-100', 'opacity-100');
+                    mobileMenu.classList.add('scale-0', 'opacity-0');
+                    mobileToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                    document.body.style.overflow = '';
+                }
+            }
+            mobileToggle.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+            // 4. Ripple Effect
+            document.querySelectorAll('.ripple-btn').forEach(btn => {
+                btn.addEventListener('mousedown', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // 5. Tilt Effect (Cards)
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -5;
+                    const rotateY = ((x - centerX) / centerX) * 5;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+
+            // 6. Fade-Up Reveal & Counters
+            const observerOptions = { threshold: 0.2 };
+            let countersAnimated = false;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // Counter Trigger
+                        if (entry.target.querySelector('.counter') && !countersAnimated) {
+                            animateCounters();
+                            countersAnimated = true;
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            function animateCounters() {
+                document.querySelectorAll('.counter').forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000;
+                    const start = performance.now();
+                    
+                    function update(time) {
+                        const prog = Math.min((time - start) / duration, 1);
+                        const easeOut = 1 - Math.pow(1 - prog, 3);
+                        counter.innerText = Math.floor(easeOut * target);
+                        if (prog < 1) requestAnimationFrame(update);
+                        else counter.innerText = target;
+                    }
+                    requestAnimationFrame(update);
+                });
+            }
+
+            // 7. Hero Typewriter
+            const text = "I transform brands into industry leaders through data-driven strategies & creative campaigns.";
+            const twElement = document.getElementById('hero-typewriter');
+            let twIdx = 0;
+            function typeWriter() {
+                if (twIdx < text.length) {
+                    twElement.textContent += text.charAt(twIdx);
+                    twIdx++;
+                    setTimeout(typeWriter, 40);
+                }
+            }
+            setTimeout(typeWriter, 2000);
+
+            // 8. Portfolio Filtering
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portItems = document.querySelectorAll('.portfolio-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Active state
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-primary/20', 'border-primary/50', 'text-white', 'active');
+                        b.classList.add('border-gray-700', 'text-gray-400');
+                    });
+                    btn.classList.remove('border-gray-700', 'text-gray-400');
+                    btn.classList.add('bg-primary/20', 'border-primary/50', 'text-white', 'active');
+
+                    const filter = btn.getAttribute('data-filter');
+                    portItems.forEach(item => {
+                        item.classList.remove('show');
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            setTimeout(() => item.classList.add('show'), 50);
+                        }
+                    });
+                });
+            });
+
+            // 9. Testimonial Carousel
+            const testimonials = [
+                { text: "Nurullah completely transformed our digital presence. ROI is through the roof!", name: "Sarah Jenkins", role: "CMO, TechFlow", img: "https://i.pravatar.cc/100?img=5" },
+                { text: "Best decision we made this year. The organic growth has been phenomenal.", name: "Mike Roberts", role: "Founder, GreenEco", img: "https://i.pravatar.cc/100?img=12" },
+                { text: "His cold email strategies booked us 20 enterprise meetings in one month.", name: "Elena Davis", role: "VP Sales, SoftCorp", img: "https://i.pravatar.cc/100?img=9" },
+                { text: "A true expert who cares about data and actual business results, not just vanity metrics.", name: "David Chen", role: "CEO, Innovate", img: "https://i.pravatar.cc/100?img=14" },
+                { text: "Incredible attention to detail in our ad campaigns. Saved us thousands in wasted spend.", name: "Amanda Smith", role: "Director, RetailPlus", img: "https://i.pravatar.cc/100?img=1" }
+            ];
+
+            const track = document.getElementById('carousel-track');
+            const dotsContainer = document.getElementById('carousel-dots');
+            
+            // Build slides
+            testimonials.forEach((t, i) => {
+                const div = document.createElement('div');
+                // 1 on mobile (100%), 3 on desktop (33.333% minus gap adjustment)
+                div.className = 'w-full md:w-[calc(33.333%-16px)] flex-shrink-0 glass-card p-8 rounded-2xl';
+                div.innerHTML = `
+                    <i class="fa-solid fa-quote-left text-3xl text-primary/30 mb-4 block"></i>
+                    <p class="text-gray-300 italic mb-6">"${t.text}"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="${t.img}" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-bold text-white">${t.name}</h4>
+                            <p class="text-xs text-gray-400">${t.role}</p>
+                        </div>
+                    </div>
+                `;
+                track.appendChild(div);
+
+                const dot = document.createElement('button');
+                dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === 0 ? 'bg-primary w-8' : 'bg-gray-600'}`;
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            });
+
+            let currentSlide = 0;
+            const maxSlidesDesktop = testimonials.length - 3;
+            const maxSlidesMobile = testimonials.length - 1;
+            
+            function goToSlide(index) {
+                const isMobile = window.innerWidth < 768;
+                const max = isMobile ? maxSlidesMobile : maxSlidesDesktop;
+                
+                if (index < 0) index = max;
+                if (index > max) index = 0;
+                
+                currentSlide = index;
+                
+                const slideWidth = track.children[0].getBoundingClientRect().width;
+                const gap = 24; // 1.5rem
+                const moveX = (slideWidth + gap) * currentSlide;
+                
+                track.style.transform = `translateX(-${moveX}px)`;
+                
+                // Update dots
+                Array.from(dotsContainer.children).forEach((dot, i) => {
+                    dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-primary w-8' : 'bg-gray-600'}`;
+                });
+            }
+
+            document.getElementById('prev-btn').onclick = () => goToSlide(currentSlide - 1);
+            document.getElementById('next-btn').onclick = () => goToSlide(currentSlide + 1);
+
+            // Autoplay
+            let carouselInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+            track.addEventListener('mouseenter', () => clearInterval(carouselInterval));
+            track.addEventListener('mouseleave', () => carouselInterval = setInterval(() => goToSlide(currentSlide + 1), 5000));
+
+            // Swipe logic for carousel
+            let startX = 0;
+            track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+            track.addEventListener('touchend', e => {
+                const endX = e.changedTouches[0].clientX;
+                if (startX - endX > 50) goToSlide(currentSlide + 1); // swipe left
+                else if (endX - startX > 50) goToSlide(currentSlide - 1); // swipe right
+            });
+
+            window.addEventListener('resize', () => goToSlide(0)); // Reset on resize
+
+            // 10. FAQ Accordion
+            const faqs = [
+                { q: "How long does it take to see results?", a: "For SEO, it typically takes 3-6 months to see significant changes. Paid advertising and social media campaigns can yield immediate traffic and engagement within the first week." },
+                { q: "Are the social media followers real?", a: "Yes, we prioritize organic growth strategies. For 'boost' packages, we use networks of real, active accounts to ensure your account remains safe and compliant with platform policies." },
+                { q: "Do you offer refunds?", a: "We have a 30-day satisfaction guarantee for our retainer services. If we don't hit the agreed-upon KPIs, we will work for free until we do, or offer a prorated refund." },
+                { q: "Can I choose the target country?", a: "Absolutely. We use advanced geo-targeting across all our services, from SEO to paid ads and follower acquisition, ensuring your audience is localized to your needs." },
+                { q: "Is my account safe?", a: "100%. We strictly adhere to the terms of service of all platforms (Google, Meta, LinkedIn). We never use bots or black-hat tactics that could jeopardize your account." }
+            ];
+
+            const accordion = document.getElementById('accordion');
+            faqs.forEach((faq, i) => {
+                const item = document.createElement('div');
+                item.className = 'faq-item glass-card rounded-xl border border-white/10 overflow-hidden';
+                item.innerHTML = `
+                    <button class="w-full px-6 py-4 flex justify-between items-center text-left hover:bg-white/5 transition-colors focus:outline-none">
+                        <span class="font-bold text-lg">${faq.q}</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-6 bg-black/20">
+                        <p class="py-4 text-gray-400 leading-relaxed">${faq.a}</p>
+                    </div>
+                `;
+                
+                const btn = item.querySelector('button');
+                btn.onclick = () => {
+                    const isActive = item.classList.contains('active');
+                    // Close all
+                    document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+                    if (!isActive) item.classList.add('active');
+                };
+                
+                accordion.appendChild(item);
+            });
+
+            // 11. Form Validation
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let valid = true;
+                
+                const name = document.getElementById('name');
+                const email = document.getElementById('email');
+                const msg = document.getElementById('message');
+                
+                if(name.value.trim().length < 2) { document.getElementById('err-name').classList.remove('hidden'); valid = false; }
+                else { document.getElementById('err-name').classList.add('hidden'); }
+                
+                if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { document.getElementById('err-email').classList.remove('hidden'); valid = false; }
+                else { document.getElementById('err-email').classList.add('hidden'); }
+                
+                if(msg.value.trim().split(/\s+/).length <= 10) { document.getElementById('err-msg').classList.remove('hidden'); valid = false; }
+                else { document.getElementById('err-msg').classList.add('hidden'); }
+                
+                if(valid) {
+                    showToast("Message sent successfully! I'll be in touch.");
+                    contactForm.reset();
+                }
+            });
+
+            // Navigation active state update
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(sec => {
+                    const secTop = sec.offsetTop;
+                    if (window.scrollY >= secTop - 150) {
+                        current = sec.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active', 'text-white');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active', 'text-white');
+                    }
+                });
+            });
+
+        });
+
+        // Global functions for inline handlers
+        function openLightbox(imgSrc, title, desc) {
+            document.getElementById('lb-img').src = imgSrc;
+            document.getElementById('lb-title').innerText = title;
+            document.getElementById('lb-desc').innerText = desc;
+            document.getElementById('lightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function orderToast() { showToast("Order functionality coming soon!"); }
+        function subToast() { 
+            const email = document.getElementById('nl-email');
+            if(email.value) {
+                showToast("Subscribed successfully!"); 
+                email.value = '';
+            } else {
+                showToast("Please enter an email address.");
+            }
+        }
+    </script>
+</body>
+</html>
